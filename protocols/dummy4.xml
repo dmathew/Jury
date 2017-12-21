@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<protocol id="dummy" startstate="unknown">
+  <state id="unknown" type="start">
+    <transition id="to_over160" />
+    <transition id="to_under160" />
+  </state>
+  
+  <state id="bw160_180" type="d" />
+  <state id="under160" type="d" />
+  
+  <transition id="to_over160">
+    <deststate id="bw160_180" />
+    <cond>  
+      <irange>
+        <emr attribute="sbp" />
+        <lb><ivalue>160</ivalue></lb>
+        <ub><ivalue>180</ivalue></ub>
+      </irange>
+    </cond>
+  </transition>
+  
+  <transition id="to_under160">
+    <deststate id="under160" />
+    <cond>  
+      <lt>
+        <emr attribute="sbp" />
+        <ivalue>160</ivalue>
+      </lt>
+    </cond>
+  </transition>
+  
+</protocol>

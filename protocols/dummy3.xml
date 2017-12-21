@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<protocol id="dummy" startstate="unknown">
+  <state id="unknown" type="start">
+    <transition id="s1s21" />
+    <transition id="s1s2" />
+  </state>
+  
+  <state id="s2_1" type="start">
+    <transition id="s21s3" />
+    <transition id="s21s22" />
+  </state>
+  
+  <state id="s2_2" type="start">
+  </state>
+  
+  <state id="s2" type="start">
+    <transition id="s2s3" />
+  </state>
+  
+  <state id="s3" type="end">
+  </state>
+  
+  <transition id="s1s2">
+    <deststate id="s2" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+  <transition id="s1s21">
+    <deststate id="s2_1" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+  <transition id="s21s22">
+    <deststate id="s2_2" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+  <transition id="s2s3">
+    <deststate id="s3" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+  <transition id="s21s3">
+    <deststate id="s3" />
+    <cond><bvalue>false</bvalue></cond>
+  </transition>
+</protocol>

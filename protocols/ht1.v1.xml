@@ -1,0 +1,821 @@
+<?xml version="1.0"?>
+<protocol id="hypertension" startstate="unknown">
+  <xi:include href="medications.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <state id="unknown" type="start">
+    <transition id="to_s3ht" />
+    <transition id="to_s2ht" />
+    <transition id="to_s1ht" />
+    <transition id="to_preht" />
+    <transition id="to_optimal" />
+    <transition id="to_normal" />
+    <!--transition id="to_ht_interm1" /-->
+  </state>
+  
+  <state id="optimal" type="d">
+    <transition id="exit_from_optimal" />
+  </state>
+  
+  <state id="normal" type="d">
+    <transition id="exit_from_normal" />
+  </state>
+  
+  <state id="preht" type="d">
+    <name>Pre-hypertensive</name>
+    <transition id="exit_from_preht" />
+    <checkDD />
+  </state>
+  
+  <state id="ht_interm1" type="temp">
+    <transition id="to_optimal" />
+    <transition id="to_normal" />
+    <transition id="to_preht" />
+    <transition id="to_ht_interm2" />
+    <checkDD />
+  </state>
+  
+  <state id="ht_interm2" type="temp">
+    <transition id="to_s3ht" />
+    <transition id="to_s2ht" />
+    <transition id="to_s1ht" />
+    <transition id="to_preht" />
+    <transition id="to_optimal" />
+    <transition id="to_normal" />
+    <checkDD />
+  </state>
+  
+  <state id="s1ht" type="d">
+    <name>Stage 1</name>
+    <transition id="to_en5" />
+    <transition id="to_am2_5" />
+    <checkDD />
+  </state>
+  
+  <state id="s2ht" type="d">
+    <name>Stage 2</name>
+    <transition id="to_en5" />
+    <transition id="to_am2_5" />
+    <checkDD />
+  </state>
+  
+  <state id="s3ht" type="d">
+    <transition id="to_refer" />
+    <checkDD />
+  </state>
+  
+  <state id="en5" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="en10" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10_am2_5" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="en10_am2_5" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">2.5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10_am5" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="en10_am5" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10_am10" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="en10_am10" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10_am10_at25" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="en10_am10_at25" type="t">
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Atenolol</name>
+      <dosage unit="mg">25</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_refer" />
+    <transition id="to_tg_young" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="am2_5" type="t">
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">2.5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_am5" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="am5" type="t">
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_am10" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="am10" type="t">
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_am10_en5" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="am10_en5" type="t">
+    <med>
+      <name>Amlodipine</name>
+      <dosage unit="mg">10</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <med>
+      <name>Enalapril</name>
+      <dosage unit="mg">5</dosage>
+      <frequency>OD</frequency>
+      <duration type="days">15</duration>
+    </med>
+    <transition id="to_unknown" />
+    <transition id="to_en10_am10" />
+    <transition id="to_tg_old" />
+    <transition id="to_tg_diabetic" />
+    <transition id="to_tg_stroke" />
+  </state>
+  
+  <state id="tg_young" type="tg">
+    <transition id="exit_from_tg_young" />
+  </state>
+  
+  <state id="tg_old" type="tg">
+    <transition id="exit_from_tg_old" />
+  </state>
+  
+  <state id="tg_diabetic" type="tg">
+    <transition id="exit_from_tg_diabetic" />
+  </state>
+  
+  <state id="tg_stroke" type="tg">
+    <transition id="exit_from_tg_stroke" />
+  </state>
+  
+  <state id="refer" type="refer">
+    <checkDD />
+  </state>
+  
+  <transition id="to_optimal">
+    <deststate id="optimal" />
+    <cond>
+      <and>
+        <lt>
+          <emr attribute="sbp"></emr>
+          <ivalue>120</ivalue>
+        </lt>
+        <lt>
+          <emr attribute="dbp"></emr>
+          <ivalue>80</ivalue>
+        </lt>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_optimal">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp"></emr>
+          <ivalue>120</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp"></emr>
+          <ivalue>80</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+
+  <transition id="to_normal">
+    <deststate id="normal" />
+    <cond>
+      <and>
+        <lt>
+          <emr attribute="sbp"></emr>
+          <ivalue>130</ivalue>
+        </lt>
+        <lt>
+          <emr attribute="dbp"></emr>
+          <ivalue>85</ivalue>
+        </lt>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_normal">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp"></emr>
+          <ivalue>130</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp"></emr>
+          <ivalue>85</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_preht">
+    <deststate id="preht" />
+    <cond>
+      <or>
+        <irange>
+          <emr attribute="sbp"></emr>
+          <lb><ivalue>130</ivalue></lb>
+          <ub><ivalue>139</ivalue></ub>
+        </irange>
+        <irange>
+          <emr attribute="dbp"></emr>
+          <lb><ivalue>85</ivalue></lb>
+          <ub><ivalue>89</ivalue></ub>
+        </irange>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_preht">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gt>
+          <emr attribute="sbp"></emr>
+          <ivalue>139</ivalue>
+        </gt>
+        <gt>
+          <emr attribute="dbp"></emr>
+          <ivalue>89</ivalue>
+        </gt>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_ht_interm1">
+    <deststate id="ht_interm1" />
+    <cond>
+      <and>
+        <or>
+          <gt>
+            <emr attribute="sbp"></emr>
+            <ivalue>140</ivalue>
+          </gt>
+          <gt>
+            <emr attribute="dbp"></emr>
+            <ivalue>90</ivalue>
+          </gt>
+        </or>
+        <irange>
+          <dateDiff />
+          <lb><ivalue>2</ivalue></lb>
+          <ub><ivalue>4</ivalue></ub>
+        </irange>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_ht_interm2">
+    <deststate id="ht_interm2" />
+    <cond>
+      <and>
+        <or>
+          <gt>
+            <emr attribute="sbp"></emr>
+            <ivalue>140</ivalue>
+          </gt>
+          <gt>
+            <emr attribute="dbp"></emr>
+            <ivalue>90</ivalue>
+          </gt>
+        </or>
+        <irange>
+          <dateDiff />
+          <lb><ivalue>2</ivalue></lb>
+          <ub><ivalue>4</ivalue></ub>
+        </irange>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_s1ht">
+    <deststate id="s1ht" />
+    <cond>
+      <or>
+        <irange>
+          <emr attribute="sbp"></emr>
+          <lb><ivalue>140</ivalue></lb>
+          <ub><ivalue>159</ivalue></ub>
+        </irange>
+        <irange>
+          <emr attribute="dbp"></emr>
+          <lb><ivalue>90</ivalue></lb>
+          <ub><ivalue>99</ivalue></ub>
+        </irange>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_s2ht">
+    <deststate id="s2ht" />
+    <cond>
+      <or>
+        <irange>
+          <emr attribute="sbp"></emr>
+          <lb><ivalue>160</ivalue></lb>
+          <ub><ivalue>179</ivalue></ub>
+        </irange>
+        <irange>
+          <emr attribute="dbp"></emr>
+          <lb><ivalue>100</ivalue></lb>
+          <ub><ivalue>109</ivalue></ub>
+        </irange>
+      </or>
+    </cond>
+  </transition>
+
+  <transition id="to_s3ht">
+    <deststate id="s3ht" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp"></emr>
+          <ivalue>180</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp"></emr>
+          <ivalue>110</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_en5">
+    <deststate id="en5" />
+    <cond>
+      <lt>
+        <profile attribute="age" />
+        <ivalue>55</ivalue>
+      </lt>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10">
+    <deststate id="en10" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10_am2_5">
+    <deststate id="en10_am2_5" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10_am5">
+    <deststate id="en10_am5" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10_am10">
+    <deststate id="en10_am10" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10_am10_at25">
+    <deststate id="en10_am10_at25" />
+    <cond>
+      
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+        <!-- and no asthma -->
+      
+    </cond>
+  </transition>
+  
+  <transition id="to_am2_5">
+    <deststate id="am2_5" />
+    <cond>
+      <gte>
+        <profile attribute="age" />
+        <ivalue>55</ivalue>
+      </gte>
+    </cond>
+  </transition>
+  
+  <transition id="to_am5">
+    <deststate id="am5" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_am10">
+    <deststate id="am10" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_am10_en5">
+    <deststate id="am10_en5" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_en10_am10">
+    <deststate id="en10_am10" />
+    <cond>
+      <and>
+        <noImprovement />
+        <irange>
+          <dateDiff />
+          <lb><ivalue>14</ivalue></lb>
+          <ub><ivalue>18</ivalue></ub>
+        </irange>
+
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_tg_young">
+    <deststate id="tg_young" />
+    <cond>
+      <and>
+        <and>
+          <lt>
+            <profile attribute="age" />
+            <ivalue>55</ivalue>
+          </lt>
+          <and>
+            <lt>
+              <emr attribute="sbp" />
+              <ivalue>130</ivalue>
+            </lt>
+            <lt>
+              <emr attribute="dbp" />
+              <ivalue>85</ivalue>
+            </lt>
+          </and>
+        </and>
+        <and>
+          <eq>
+            <profile attribute="isDiabetic" />
+            <bvalue>false</bvalue>
+          </eq>
+          <eq>
+            <profile attribute="isStrokePatient" />
+            <bvalue>false</bvalue>
+          </eq>
+        </and>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_tg_young">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp" />
+          <ivalue>130</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp" />
+          <ivalue>85</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+
+  <transition id="to_tg_old">
+    <deststate id="tg_old" />
+    <cond>
+      <and>
+        <and>
+          <gte>
+            <profile attribute="age" />
+            <ivalue>55</ivalue>
+          </gte>
+          <and>
+            <lt>
+              <emr attribute="sbp" />
+              <ivalue>140</ivalue>
+            </lt>
+            <lt>
+              <emr attribute="dbp" />
+              <ivalue>90</ivalue>
+            </lt>
+          </and>
+        </and>
+        <and>
+          <eq>
+            <profile attribute="isDiabetic" />
+            <bvalue>false</bvalue>
+          </eq>
+          <eq>
+            <profile attribute="isStrokePatient" />
+            <bvalue>false</bvalue>
+          </eq>
+        </and>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_tg_old">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp" />
+          <ivalue>140</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp" />
+          <ivalue>90</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_tg_diabetic">
+    <deststate id="tg_diabetic" />
+    <cond>
+      <and>
+        <and>
+          <lt>
+            <emr attribute="sbp" />
+            <ivalue>130</ivalue>
+          </lt>
+          <lt>
+            <emr attribute="dbp" />
+            <ivalue>80</ivalue>
+          </lt>
+        </and>
+        <eq>
+          <profile attribute="isDiabetic" />
+          <bvalue>true</bvalue>
+        </eq>
+        <!-- if dm & stroke, tg_diabetic is the tg state as it has lower
+             goal values than tg_stroke.
+        -->
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_tg_diabetic">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp" />
+          <ivalue>130</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp" />
+          <ivalue>80</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_tg_stroke">
+    <deststate id="tg_stroke" />
+    <cond>
+      <and>
+        <and>
+          <lt>
+            <emr attribute="sbp" />
+            <ivalue>130</ivalue>
+          </lt>
+          <lt>
+            <emr attribute="dbp" />
+            <ivalue>85</ivalue>
+          </lt>
+        </and>
+        <and>
+          <eq>
+            <profile attribute="isDiabetic" />
+            <bvalue>false</bvalue>
+          </eq>
+          <eq>
+            <profile attribute="isStrokePatient" />
+            <bvalue>true</bvalue>
+          </eq>
+        </and>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="exit_from_tg_stroke">
+    <deststate id="unknown" />
+    <cond>
+      <or>
+        <gte>
+          <emr attribute="sbp" />
+          <ivalue>130</ivalue>
+        </gte>
+        <gte>
+          <emr attribute="dbp" />
+          <ivalue>85</ivalue>
+        </gte>
+      </or>
+    </cond>
+  </transition>
+  
+  <transition id="to_refer">
+    <deststate id="refer" />
+    <cond>
+      <noImprovement />
+    </cond>
+  </transition>
+  
+  <transition id="to_unknown">
+    <deststate id="unknown" />
+    <cond>
+      <and>
+        <noImprovement />
+        <gte>
+          <dateDiff />
+          <ivalue>20</ivalue>
+        </gte>
+      </and>
+    </cond>
+  </transition>
+  
+</protocol>

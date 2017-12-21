@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<medications>
+  <medication id="Enalapril">
+    <bname>Dilvas-5</bname>
+    <bname>Dilvas-10</bname>
+    <maxDosage>40</maxDosage>
+    <test>
+      <id>8</id>
+      <cond>
+        <or>
+          <and>
+            <eq>
+              <profile attribute="gender" />
+              <svalue>M</svalue>
+            </eq>
+            <irange>
+              <testattr name="serumCreatinine" />
+              <lb><fvalue>0.7</fvalue></lb>
+              <ub><fvalue>1.3</fvalue></ub>
+            </irange>
+          </and>
+          <and>
+            <eq>
+              <profile attribute="gender" />
+              <svalue>F</svalue>
+            </eq>
+            <irange>
+              <testattr name="serumCreatinine" />
+              <lb><fvalue>0.6</fvalue></lb>
+              <ub><fvalue>1.1</fvalue></ub>
+            </irange>
+          </and>
+        </or>
+      </cond>
+    </test>
+  </medication>
+
+  <medication id="Amlodipine">
+    <bname>Amlip</bname>
+    <bname>Amlibon</bname>
+    <bname>Amlopen</bname>
+    <maxDosage>10</maxDosage>
+    <test />
+  </medication>
+
+  <medication id="Atenolol">
+    <bname>Atenolol</bname>
+  </medication>
+</medications>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<protocol id="dummy" startstate="unknown">
+  <state id="unknown" type="start">
+    <transition id="s1s2" />
+  </state>
+  
+  <state id="s2" type="start">
+    <transition id="s2s3" />
+  </state>
+  
+  <state id="s3" type="end">
+  </state>
+  
+  <transition id="s1s2">
+    <deststate id="s2" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+  <transition id="s2s3">
+    <deststate id="s3" />
+    <cond><bvalue>true</bvalue></cond>
+  </transition>
+</protocol>

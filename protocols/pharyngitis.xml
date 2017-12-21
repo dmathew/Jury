@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<protocol id="pharyngitis" startstate="unknown">
+  <xi:include href="medications.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <state id="unknown" type="start">
+    <transition id="to_pharyngitis" />
+  </state>
+  
+  <state id="pharyngitis" type="d">
+    <transition id="to_trtmnt_infant" />
+    <transition id="to_trtmnt_child" />
+    <transition id="to_trtmnt_adult" />
+  </state>
+  
+  <state id="trtmnt_infant" type="t">
+    <transition id="to_refer" />
+  </state>
+  
+  <state id="trtmnt_child" type="t">
+    <med>
+      <name>Paracetamol</name>
+      <dosage unit="mg">500</dosage>
+      <frequency>TID</frequency>
+      <duration type="days">3</duration>  <!-- >=3days -->
+    </med>
+    <med>
+      <name>Amoxycillin</name>
+      <dosage unit="mg" perkg="true">20</dosage>
+      <frequency>BID</frequency>
+      <duration type="days">10</duration>
+    </med>
+    <transition id="to_end" />
+  </state>
+  
+  <state id="trtmnt_adult" type="t">
+    <med>
+      <name>Paracetamol</name>
+      <dosage unit="mg">500</dosage>
+      <frequency>TID</frequency>
+      <duration type="days">3</duration>  <!-- >=3days -->
+    </med>
+    <med>
+      <name>Amoxycillin</name>
+      <dosage unit="mg" perkg="true">500</dosage>
+      <frequency>BID</frequency>
+      <duration type="days">10</duration>
+    </med>
+    <transition id="to_end" />
+  </state>
+  
+  <state id="refer" type="refer">
+  </state>
+  
+  <state id="end" type="stop">
+  </state>
+  
+  <transition id="to_trtmnt_infant">
+    <deststate id="trtmnt_infant" />
+    <cond>
+      <and>
+        <contains>
+          <diagnosis />
+          <svalue>pharyngitis</svalue>
+        </contains>
+        <lt>
+          <profile attribute="age" />
+          <ivalue>1</ivalue> <!-- 3mths -->
+        </lt>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_trtmnt_child">
+    <deststate id="trtmnt_child" />
+    <cond>
+      <and>
+        <contains>
+          <diagnosis />
+          <svalue>pharyngitis</svalue>
+        </contains>
+        <lt>
+          <profile attribute="age" />
+          <ivalue>13</ivalue>
+        </lt>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_trtmnt_adult">
+    <deststate id="trtmnt_adult" />
+    <cond>
+      <and>
+        <contains>
+          <diagnosis />
+          <svalue>pharyngitis</svalue>
+        </contains>
+        <gte>
+          <profile attribute="age" />
+          <ivalue>13</ivalue>
+        </gte>
+      </and>
+    </cond>
+  </transition>
+  
+  <transition id="to_refer">
+    <deststate id="refer"/>
+    <cond>
+      <bvalue>true</bvalue>
+    </cond>
+  </transition>
+  
+  <transition id="to_end">
+    <deststate id="end" />
+    <cond>
+      <bvalue>true</bvalue>
+    </cond>
+  </transition>
+</protocol>
